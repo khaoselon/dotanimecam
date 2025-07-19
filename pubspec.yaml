@@ -1,0 +1,118 @@
+name: dotanimecam
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0-196.1.beta
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI & State Management
+  cupertino_icons: ^1.0.8
+
+  # Camera & Image Processing
+  camera: ^0.10.5+9
+  image: ^4.0.17
+  
+  # File & Storage
+  path_provider: ^2.1.1
+  shared_preferences: ^2.2.2
+  image_gallery_saver: ^2.0.3
+  
+  # Permissions
+  permission_handler: ^11.1.0
+  app_tracking_transparency: ^2.0.4
+  
+  # Share & Export
+  share_plus: ^7.2.1
+  
+  # Ads
+  google_mobile_ads: ^4.0.0
+  
+  # Device Info
+  device_info_plus: ^9.1.1
+  package_info_plus: ^4.2.0
+  
+  # URL Launcher
+  url_launcher: ^6.2.1
+  
+  # Localization
+  intl: ^0.18.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+
+  uses-material-design: true
+
+    # アプリアイコン
+  # flutter_launcher_icons を使用して生成
+  
+  # フォント
+  fonts:
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSansCJK-Regular.ttc
+        - asset: assets/fonts/NotoSansCJK-Bold.ttc
+          weight: 700
+    
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+
+  # アセット
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/animations/
+    - assets/tutorial/
+    
+  # 生成されたローカライゼーションファイル
+  generate: true
+
+# Flutter Launcher Icons設定
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/icons/app_icon.png"
+    background_color: "#6B73FF"
+    theme_color: "#6B73FF"
+  windows:
+    generate: true
+    image_path: "assets/icons/app_icon.png"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "assets/icons/app_icon.png"
+
+# Flutter Native Splash設定
+flutter_native_splash:
+  color: "#6B73FF"
+  image: assets/images/splash_logo.png
+  android_12:
+    image: assets/images/splash_logo.png
+    color: "#6B73FF"
+  web: false
+
+# 追加設定
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations
+  main_locale: ja
+  arb_dir: lib/l10n
+  output_dir: lib/generated
+  use_deferred_loading: false
