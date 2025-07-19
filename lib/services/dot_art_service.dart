@@ -107,14 +107,18 @@ class DotArtService {
   // カラーパレット削減
   img.Image _reduceColorPalette(img.Image image, int colorCount) {
     // K-meansクラスタリングを使用してカラーパレットを削減
-    final colors = <Color>[];
     final pixelData = <Color>[];
 
     // 全ピクセルの色を取得
     for (int y = 0; y < image.height; y++) {
       for (int x = 0; x < image.width; x++) {
         final pixel = image.getPixel(x, y);
-        final color = Color(pixel);
+        final color = Color.fromARGB(
+          255,
+          pixel.r.toInt(),
+          pixel.g.toInt(),
+          pixel.b.toInt(),
+        );
         pixelData.add(color);
       }
     }
@@ -126,19 +130,22 @@ class DotArtService {
     final newImage = img.Image(width: image.width, height: image.height);
     for (int y = 0; y < image.height; y++) {
       for (int x = 0; x < image.width; x++) {
-        final originalColor = Color(
-          image.getPixel(x, y).r.toInt() << 16 |
-              image.getPixel(x, y).g.toInt() << 8 |
-              image.getPixel(x, y).b.toInt(),
+        final pixel = image.getPixel(x, y);
+        final originalColor = Color.fromARGB(
+          255,
+          pixel.r.toInt(),
+          pixel.g.toInt(),
+          pixel.b.toInt(),
         );
         final nearestColor = _findNearestColor(originalColor, palette);
-        newImage.setPixelRgba(
+        newImage.setPixel(
           x,
           y,
-          nearestColor.red,
-          nearestColor.green,
-          nearestColor.blue,
-          255,
+          img.ColorRgb8(
+            nearestColor.red,
+            nearestColor.green,
+            nearestColor.blue,
+          ),
         );
       }
     }
@@ -268,7 +275,7 @@ class DotArtService {
     Color color,
     DotStyle style,
   ) {
-    final center = size / 2;
+    final center = size / 2.0;
 
     for (int y = 0; y < size; y++) {
       for (int x = 0; x < size; x++) {
@@ -301,13 +308,10 @@ class DotArtService {
               pixelX < image.width &&
               pixelY >= 0 &&
               pixelY < image.height) {
-            image.setPixelRgba(
+            image.setPixel(
               pixelX,
               pixelY,
-              color.red,
-              color.green,
-              color.blue,
-              color.alpha,
+              img.ColorRgb8(color.red, color.green, color.blue),
             );
           }
         }
@@ -388,13 +392,14 @@ class DotArtService {
           pixel.b.toInt(),
         );
         final nearestColor = _findNearestColor(originalColor, customPalette);
-        newImage.setPixelRgba(
+        newImage.setPixel(
           x,
           y,
-          nearestColor.red,
-          nearestColor.green,
-          nearestColor.blue,
-          255,
+          img.ColorRgb8(
+            nearestColor.red,
+            nearestColor.green,
+            nearestColor.blue,
+          ),
         );
       }
     }

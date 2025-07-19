@@ -176,8 +176,9 @@ class _SettingsScreenState extends State<SettingsScreen>
   }
 
   void _openUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
     }
   }
 
@@ -350,7 +351,7 @@ class _SettingsScreenState extends State<SettingsScreen>
         SettingsItem(
           title: localizations.tutorial,
           subtitle: 'チュートリアルを再表示',
-          onTap: _showTutorial,
+          onTap: _showTutorialDialog,
           trailing: Icon(Icons.arrow_forward_ios),
         ),
 
